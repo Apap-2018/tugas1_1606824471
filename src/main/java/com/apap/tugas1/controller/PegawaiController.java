@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,13 +25,17 @@ public class PegawaiController {
 	@Autowired
 	private PegawaiService pegawaiService;
 	
-	
+
 	@RequestMapping("/")
 	private String home(Model model) {
 		model.addAttribute("title", "Home");
 		return "home";
 	}
 	
+
+	/*
+	 * Fitur 1: Menampilkan Data Pegawai Berdasarkan NIP
+	 */
 	@RequestMapping(value="/pegawai")
 	private String view(@RequestParam(value="nip") String nip, Model model) {
 		PegawaiModel pegawai = pegawaiService.getPegawaiDetailByNip(nip);
@@ -54,4 +59,31 @@ public class PegawaiController {
 		
 		return "lihat-data-pegawai";
 	}
+	
+	
+	/*
+	 * Fitur 2: Menambahkan Data Pegawai di Suatu Instansi
+	 */
+	@RequestMapping(value = "/pegawai/tambah", method = RequestMethod.GET)
+	private String add(Model model) {
+		model.addAttribute("pegawai", new PegawaiModel());
+		model.addAttribute("title", "Tambah Pegawai");
+		return "tambah-pegawai";
+	}
+	
+	@RequestMapping(value = "/pegawai/tambah", method = RequestMethod.POST)
+	private String addCarSubmit(@ModelAttribute PegawaiModel pegawai, Model model) {
+		pegawaiService.addPegawai(pegawai);
+		model.addAttribute("title", "Sukses!");
+		return "tambah-pegawai-sukses";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
