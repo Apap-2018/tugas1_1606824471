@@ -1,5 +1,8 @@
 package com.apap.tugas1.service;
 
+import java.text.SimpleDateFormat;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,8 +17,8 @@ public class PegawaiServiceImpl implements PegawaiService{
 	private PegawaiDb pegawaiDb;
 	
 	@Override
-	public void addPegawai(PegawaiModel pegawai) {
-		pegawaiDb.save(pegawai);
+	public PegawaiModel addPegawai(PegawaiModel pegawai) {
+		return pegawaiDb.save(pegawai);
 	}
 
 
@@ -27,8 +30,31 @@ public class PegawaiServiceImpl implements PegawaiService{
 
 	@Override
 	public PegawaiModel getPegawai(Long id) {
-		// TODO Auto-generated method stub
 		return null;
+	}
+
+
+	@Override
+	public void generateNip(PegawaiModel pegawai) {
+		SimpleDateFormat formatDate = new SimpleDateFormat("ddMMyy");
+		String newDateFormat = formatDate.format(pegawai.getTanggalLahir());
+		
+		int urutan = 1;
+		List<PegawaiModel> listPegawai = pegawaiDb.findByInstansi(pegawai.getInstansi());
+		for (PegawaiModel oPegawai : listPegawai) {
+			if (pegawai.getTanggalLahir().equals(oPegawai.getTanggalLahir()))
+				urutan++;
+		}
+		
+		String strUrutan = "";
+		if (urutan<10) {
+			strUrutan = "0" + urutan;
+		}
+		
+		String nip = pegawai.getInstansi().getId()+""+newDateFormat+
+					pegawai.getTahunMasuk()+""+strUrutan;
+		pegawai.setNip(nip);
+		
 	}
 
 }

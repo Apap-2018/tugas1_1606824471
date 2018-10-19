@@ -8,8 +8,9 @@ import com.apap.tugas1.model.PegawaiModel;
  * CarService
  */
 public interface PegawaiService {
-	void addPegawai(PegawaiModel pegawai);
+	PegawaiModel addPegawai(PegawaiModel pegawai);
 	public PegawaiModel getPegawai(Long id);
 	PegawaiModel getPegawaiDetailByNip(String nip);
+	public void generateNip(PegawaiModel pegawai);
 	
 }

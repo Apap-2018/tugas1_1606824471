@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.apap.tugas1.model.JabatanModel;
+import com.apap.tugas1.model.PegawaiModel;
 import com.apap.tugas1.repository.JabatanDb;
 
 @Service
@@ -19,6 +20,11 @@ public class JabatanServiceImpl implements JabatanService {
 	public List<JabatanModel> getListJabatan() {
 		// TODO Auto-generated method stub
 		return jabatanDb.findAll();
+	}
+	
+	@Override
+	public JabatanModel addJabatan(JabatanModel jabatan) {
+		return jabatanDb.save(jabatan);
 	}
 	
 

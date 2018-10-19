@@ -16,7 +16,7 @@
 		<div class="row">
 			<div class="col-md-6">
 				<div class="card">
-					<form th:action="@{/pegawai}" method="GET">
+					<form th:action="@{/pegawai/tambah}" th:object="${pegawai}" method="POST">
 						<div class="card-body">
 							<table style="width:100%" cellpadding="10">
 							<tr>
@@ -26,29 +26,43 @@
 							  </tr>
 							  <tr>
 							    <th>Tempat Lahir</th>
-							    <td><input class="form-control"  type="text" name="nama"/></td>
+							    <td><input class="form-control"  type="text" name="tempatLahir"/></td>
 							  </tr>
 							  <tr>
 							    <th>Tanggal Lahir</th>
-							    <td><input class="form-control"  type="text" name="nama"/></td>
+							    <td><input class="form-control"  type="date" name="tanggalLahir"/></td>
 							  </tr>
 							  <tr>
 							    <th>Tahun Masuk</th>
-							    <td><input class="form-control"  type="text" name="nama"/></td>
+							    <td><input class="form-control"  type="number" min="1900" max="2099" step="1" name="tahunMasuk"/></td>
 							  </tr>
 							  <tr>
 							    <th>Provinsi</th>
-							    <td><input class="form-control"  type="text" name="nama"/></td>
+							    <td><select class="form-control" name="provinsi">
+									  <option  th:each="provinsi,iterationStatus : ${provinsiList}"
+									  			th:value="${provinsi.nama}" th:text="${provinsi.nama}">provinsi</option>
+									 </select>
+							    </td>
+							    
 							  </tr>
 							  <tr>
 							    <th>Nama Instansi</th>
-							    <td><input class="form-control"  type="text" name="nama"/></td>
+							    <td><select class="form-control" name="instansi">
+									  <option  th:each="instansi,iterationStatus : ${instansiList}"
+									  			th:value="${instansi.id}" th:text="${instansi.nama}">instansi</option>
+									 </select>
+								</td>
 							  </tr>
 							  <tr>
 							    <th>Jabatan</th>
 							  	<td>
-							  		<input class="form-control"  type="text" name="nama"/><br>
-							  		<a href="url">Tambah Jabatan Lainnya</a>
+							  		<select class="form-control" name="jabatan">
+									  <option  th:each="jabatan,iterationStatus : ${jabatanList}"
+									  			th:value="${jabatan.nama}" th:text="${jabatan.nama}">jabatan</option>
+									 </select>
+							  		<a href="/jabatan/tambah">Tambah Jabatan Lainnya</a>
+							  		
+							  		<div name="nip" value="1234123456123412"></div>
 							  	</td>
 							  </tr>
 							</tr>
