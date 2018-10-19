@@ -45,6 +45,12 @@ public class JabatanServiceImpl implements JabatanService {
 		jabatanDb.delete(jabatanDb.findById(id));
 	}
 
+	@Override
+	public List<JabatanModel> findAll() {
+		// TODO Auto-generated method stub
+		return jabatanDb.findAll();
+	}
+
 	
 
 }

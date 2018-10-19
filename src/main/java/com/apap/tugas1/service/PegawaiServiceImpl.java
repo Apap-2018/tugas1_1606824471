@@ -56,5 +56,21 @@ public class PegawaiServiceImpl implements PegawaiService{
 		pegawai.setNip(nip);
 		
 	}
+	
+	@Override
+	public void updatePegawai(long idPegawai, PegawaiModel pegawai) {
+		PegawaiModel updatedPegawai = pegawaiDb.getOne(idPegawai);
+		updatedPegawai.setNama(pegawai.getNama());
+		updatedPegawai.setTempatLahir(pegawai.getTempatLahir());
+		updatedPegawai.setTanggalLahir(pegawai.getTanggalLahir());
+		updatedPegawai.setTahunMasuk(pegawai.getTahunMasuk());
+		updatedPegawai.setInstansi(pegawai.getInstansi());
+		pegawaiDb.save(updatedPegawai);
+	}
+	
+	@Override
+	public PegawaiModel getPegawaiDetailById(long id) {
+		return pegawaiDb.findById(id);
+	}
 
 }

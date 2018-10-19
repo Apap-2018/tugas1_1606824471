@@ -2,6 +2,7 @@ package com.apap.tugas1.controller;
 
 import java.text.MessageFormat;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -98,6 +99,10 @@ public class PegawaiController {
 		return "tambah-pegawai";
 	}
 	
+	
+	/*
+	 *Fitur 2 
+	 */
 	@RequestMapping(value = "/pegawai/tambah", method = RequestMethod.POST)
 	private String addPegawaiSubmit(@ModelAttribute PegawaiModel pegawai, Model model) {
 		pegawaiService.generateNip(pegawai);
@@ -107,6 +112,38 @@ public class PegawaiController {
 		model.addAttribute("title", "Sukses!");
 		return "tambah-pegawai-sukses";
 	}
+	
+	/*
+	 * Fitur 3: Mengubah Data Pegawai
+	 */
+	@RequestMapping(value = "/pegawai/ubah", method = RequestMethod.GET)
+	private String updateJabatan(@RequestParam(value = "pegawaiId") long id, Model model) {
+		PegawaiModel pegawai =  pegawaiService.getPegawaiDetailById(id);
+		model.addAttribute("pegawai", pegawai);
+		model.addAttribute("pegawai_prov", pegawai.getInstansi().getProvinsi().getNama());
+		model.addAttribute("instansi", pegawai.getInstansi().getNama());
+		model.addAttribute("pegawaiJabList", pegawai.getJabatanList());
+		return "update-pegawai";
+	}
+	
+	@RequestMapping(value = "/pegawai/ubah", method = RequestMethod.POST)
+	private String updateDealerSubmit(@RequestParam(value = "pegawaiId") long id, @ModelAttribute Optional<PegawaiModel> pegawai, Model model) {
+		pegawaiService.updatePegawai(id, pegawai.get());
+		model.addAttribute("id", id);
+		return "update-pegawai-sukses";
+	}
+	
+	
+	/*
+	 * Fitur 4
+	 */
+	
+	@RequestMapping("/pegawai/cari")
+	private String cari(Model model) {
+		model.addAttribute("title", "Home");
+		return "cari-pegawai";
+	}
+	
 	
 	
 	

@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.apap.tugas1.model.JabatanModel;
 import com.apap.tugas1.service.JabatanService;
-
 /**
  * Jabatan Controller
  */
@@ -90,6 +89,19 @@ public class JabatanController {
 	private String deleteJabatan(@PathVariable(value = "id") long id, Model model) {
 		jabatanService.deleteJabatan(id);
 		return "delete-sukses";
+	}
+	
+	/*
+	 * Fitur 9: Menampilkan Daftar jabatan
+	 */
+	@RequestMapping(value = "/jabatan/viewall", method = RequestMethod.GET)
+	private String viewAllDealer(Model model) {
+		List<JabatanModel> allJabatan = jabatanService.findAll();
+	
+		model.addAttribute("jabatanlist", allJabatan);
+		model.addAttribute("title", "view all jabatan");
+		
+		return "view-all-jabatan";
 	}
 
 }

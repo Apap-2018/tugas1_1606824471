@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<object th:include="fragments/fragment :: title" ></object>
+	<object th:include="fragments/fragment :: css" th:remove="tag"></object>
+	<object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+	<nav th:replace="fragments/fragment :: navbar"></nav>
+	
+	<div class="container-fluid">
+		<h2>Cari Pegawai</h2>
+		<br>
+		<div class="row">
+			<div class="col-md-6">
+				<div class="card">
+					<form th:action="@{/jabatan/tambah}" th:object="${jabatan}" method="POST">
+						<div class="card-body">
+							<table style="width:100%" cellpadding="10">
+
+							  <tr>
+							    <th>Provinsi</th>
+							    <td><input class="form-control"  type="text" name="provinsi"/></td>
+							  </tr>
+							  <tr>
+							    <th>Nama Instansi</th>
+							    <td><input class="form-control"  type="text" name="instansi"/></td>
+							  </tr>
+							  <tr>
+							    <th>Jabatan</th>
+							    <td><input class="form-control"  type="number" min="1000000" step="1" name="gaji_pokok"/></td>
+							  </tr>
+							</table>
+							<br>
+							<button type="submit" class="btn btn-primary">Cari</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

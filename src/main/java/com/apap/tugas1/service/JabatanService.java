@@ -11,4 +11,5 @@ public interface JabatanService {
 	JabatanModel getJabatanDetailById(long id);
 	public void updateJabatan(long idJabatan, JabatanModel jabatan);
 	public void deleteJabatan(long id);
+	public List<JabatanModel> findAll();
 }

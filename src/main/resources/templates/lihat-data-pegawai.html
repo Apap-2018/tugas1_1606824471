@@ -52,14 +52,11 @@
 								</td>
 								</ul>
 							  </tr>
-							  <tr>
-							    <th>Gaji</th>
-							    <td th:text="'Rp'+${gaji}"></td>
-							  </tr>
-							  </tr>
 							</table>
 							<br>
-							<button type="submit" class="btn btn-primary">Ubah</button>
+							<tr>
+								<td> <a th:href="@{/pegawai/ubah(pegawaiId=${pegawai.id})}" class="btn btn-warning">Ubah</a> </td>
+							</tr>
 						</div>
 					</form>
 				</div>
