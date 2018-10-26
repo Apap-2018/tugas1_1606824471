@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<object th:include="fragments/fragment :: title" ></object>
+	<object th:include="fragments/fragment :: css" th:remove="tag"></object>
+	<object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+	<nav th:replace="fragments/fragment :: navbar"></nav>
+	
+	<div class="container-fluid">
+		<h2>Data Pegawai Termuda </h2>
+		<br>
+		<div class="row">
+			<div class="col-md-6">
+				<div class="card">
+					<form th:action="@{/pegawai/tertua-termuda}" method="GET">
+						<div class="card-body">
+							<table style="width:100%">
+							<tr>
+							  <tr>
+							    <th>NIP</th>
+							    <td th:text="${pegawaiTermuda.nip}"></td>
+							  </tr>
+							  <tr>
+							    <th>Nama</th>
+							    <td th:text="${pegawaiTermuda.nama}"></td>
+							  </tr>
+							  <tr>
+							    <th>Tempat Lahir</th>
+							    <td th:text="${pegawaiTermuda.tempatLahir}"></td>
+							  </tr>
+							  <tr>
+							    <th>Tanggal Lahir</th>
+							    <td th:text="${pegawaiTermuda.tanggalLahir}"></td>
+							  </tr>
+							  <tr>
+							    <th>Tahun Masuk</th>
+							    <td th:text="${pegawaiTermuda.tahunMasuk}"></td>
+							  </tr>
+							  <tr>
+							    <th>Nama Instansi</th>
+							    <td th:text="${pegawaiTermuda.instansi.nama}"></td>
+							  </tr>
+							  <tr>
+							    <th>Jabatan</th>
+							    <ul>
+							    <td th:each="jabatan,iterationStatus : ${pegawaiTermuda.jabatanList}">
+									<li th:text="${jabatan.nama}"></li>
+								</td>
+								</ul>
+							  </tr>
+							</table>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<br>
+	
+	<div class="container-fluid">
+		<h2>Data Pegawai Tertua </h2>
+		<br>
+		<div class="row">
+			<div class="col-md-6">
+				<div class="card">
+					<form th:action="@{/pegawai/tertua-termuda}" method="GET">
+						<div class="card-body">
+							<table style="width:100%">
+							<tr>
+							  <tr>
+							    <th>NIP</th>
+							    <td th:text="${pegawaiTertua.nip}"></td>
+							  </tr>
+							  <tr>
+							    <th>Nama</th>
+							    <td th:text="${pegawaiTertua.nama}"></td>
+							  </tr>
+							  <tr>
+							    <th>Tempat Lahir</th>
+							    <td th:text="${pegawaiTertua.tempatLahir}"></td>
+							  </tr>
+							  <tr>
+							    <th>Tanggal Lahir</th>
+							    <td th:text="${pegawaiTertua.tanggalLahir}"></td>
+							  </tr>
+							  <tr>
+							    <th>Tahun Masuk</th>
+							    <td th:text="${pegawaiTertua.tahunMasuk}"></td>
+							  </tr>
+							  <tr>
+							    <th>Nama Instansi</th>
+							    <td th:text="${pegawaiTertua.instansi.nama}"></td>
+							  </tr>
+							  <tr>
+							    <th>Jabatan</th>
+							    <ul>
+							    <td th:each="jabatan,iterationStatus : ${pegawaiTertua.jabatanList}">
+									<li th:text="${jabatan.nama}"></li>
+								</td>
+								</ul>
+							  </tr>
+							</table>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

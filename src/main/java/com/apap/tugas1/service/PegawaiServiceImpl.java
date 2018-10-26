@@ -1,6 +1,8 @@
 package com.apap.tugas1.service;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,6 +73,16 @@ public class PegawaiServiceImpl implements PegawaiService{
 	@Override
 	public PegawaiModel getPegawaiDetailById(long id) {
 		return pegawaiDb.findById(id);
+	}
+
+
+	@Override
+	public int hitungUmur(LocalDate tanggalLahir, LocalDate today) {
+        if ((tanggalLahir != null) && (today != null)) {
+            return Period.between(tanggalLahir, today).getYears();
+        } else {
+            return 0;
+        }
 	}
 
 }

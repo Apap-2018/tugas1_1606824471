@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.apap.tugas1.model.JabatanModel;
+import com.apap.tugas1.model.InstansiModel;
 import com.apap.tugas1.service.JabatanService;
+import com.apap.tugas1.service.InstansiService;
 /**
  * Jabatan Controller
  */
@@ -22,6 +24,9 @@ public class JabatanController {
 	
 	@Autowired
 	private JabatanService jabatanService;
+	
+	@Autowired
+	private InstansiService instansiService;
 	
 	/*
 	 * Fitur 5: Menambahkan Jabatan
@@ -52,6 +57,9 @@ public class JabatanController {
 		
 		List<JabatanModel> jabatanList = jabatanService.getListJabatan();
 		model.addAttribute("jabatanList", jabatanList);
+		
+		List<InstansiModel> instansiList = instansiService.getListInstansi();
+		model.addAttribute("instansiList", instansiList);
 
 		model.addAttribute("title", "Detail Jabatan");
 		return "home";
@@ -61,6 +69,7 @@ public class JabatanController {
 	private String view(@RequestParam(value="jabatan") long id, Model model) {
 		JabatanModel jabatan = jabatanService.getJabatanDetailById(id);
 		model.addAttribute("jabatan", jabatan);
+		model.addAttribute("jumlahpegawai", jabatan.getPegawaiList().size());
 		model.addAttribute("title", "view jabatan");
 		return "view-jabatan";
 	}

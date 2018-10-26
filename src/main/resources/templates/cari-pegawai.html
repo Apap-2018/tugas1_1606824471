@@ -28,9 +28,15 @@
 							    <th>Nama Instansi</th>
 							    <td><input class="form-control"  type="text" name="instansi"/></td>
 							  </tr>
-							  <tr>
+							<tr>
 							    <th>Jabatan</th>
-							    <td><input class="form-control"  type="number" min="1000000" step="1" name="gaji_pokok"/></td>
+							  	<td>
+							  		<select class="form-control" name="jabatan">
+									  <option  th:each="jabatan,iterationStatus : ${jabatanList}"
+									  			th:value="${jabatan.nama}" th:text="${jabatan.nama}">jabatan</option>
+									 </select>
+							  		<a href="">Tambah Jabatan Lainnya</a>
+							  	</td>
 							  </tr>
 							</table>
 							<br>

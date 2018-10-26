@@ -1,6 +1,8 @@
 package com.apap.tugas1.service;
 
 
+import java.time.LocalDate;
+
 import com.apap.tugas1.model.PegawaiModel;
 
 
@@ -15,5 +17,6 @@ public interface PegawaiService {
 	public void generateNip(PegawaiModel pegawai);
 	public void updatePegawai(long idPegawai, PegawaiModel pegawai);
 	public PegawaiModel getPegawaiDetailById(long id);
+	public int hitungUmur(LocalDate tanggalLahir, LocalDate today);
 	
 }

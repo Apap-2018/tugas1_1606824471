@@ -1,8 +1,12 @@
 package com.apap.tugas1.controller;
 
-import java.text.MessageFormat;
+
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.List;
 import java.util.Optional;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -144,6 +148,57 @@ public class PegawaiController {
 		return "cari-pegawai";
 	}
 	
+	/*
+	 * Fitur 6 : Tertua Termuda
+	 */
+	@RequestMapping(value="/pegawai/tertua-termuda")
+	private String viewTertuaTermuda(@RequestParam(value="instansi") long id, Model model) {
+		InstansiModel instansi = instansiService.getInstansi(id);
+		List <PegawaiModel> pegawaiList = instansi.getPegawaiInstansi();
+		
+		
+		PegawaiModel tertua = new PegawaiModel();
+		PegawaiModel termuda = new PegawaiModel();
+		
+		int umurTertua = 0;
+		int umurTermuda = 0;
+		
+		for (PegawaiModel p : pegawaiList) {
+			Date bday =  p.getTanggalLahir();
+			LocalDate birthDate = bday.toLocalDate();
+			LocalDate today = LocalDate.now();
+			int umurP = pegawaiService.hitungUmur(birthDate, today);
+			
+			if (umurTertua!=0) {
+				if (umurTertua < umurP) {
+					umurTertua = umurP;
+					tertua = p;
+				}
+				
+			} else {
+				umurTertua = umurP;
+				tertua = p;
+			}
+			
+			if (umurTermuda!=0) {
+				if (umurTermuda > umurP) {
+					umurTermuda = umurP;
+					termuda = p;	
+				}
+			} else {
+				umurTermuda = umurP;
+				termuda = p;
+			}
+			
+			
+		}
+		System.out.println("yehu "+umurTertua);
+		
+		model.addAttribute("pegawaiTermuda", termuda);
+		model.addAttribute("pegawaiTertua", tertua);
+		
+		return "tua-muda";
+	}
 	
 	
 	
