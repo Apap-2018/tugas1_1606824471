@@ -2,6 +2,7 @@ package com.apap.tugas1.model;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -75,7 +76,7 @@ public class PegawaiModel implements Serializable {
 	@ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinTable(name = "jabatan_pegawai", joinColumns = { @JoinColumn(name = "id_pegawai") }, 
 				inverseJoinColumns = { @JoinColumn(name = "id_jabatan") })
-    private List<JabatanModel> jabatanList;
+    private List<JabatanModel> jabatanList = new ArrayList<JabatanModel>();
 	
 	
 	

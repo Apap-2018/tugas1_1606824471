@@ -85,4 +85,17 @@ public class JabatanModel implements Serializable {
 	public void setPegawaiList(List<PegawaiModel> pegawaiList) {
 		this.pegawaiList = pegawaiList;
 	}
+	
+    public boolean validate() {
+        if (this.nama == null) {
+            return false;
+        }
+        if (this.deskripsi == null) {
+            return false;
+        }
+        if (this.gaji_pokok < 0) {
+            return false;
+        }
+        return true;
+    }
 }

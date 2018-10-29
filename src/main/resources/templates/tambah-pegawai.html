@@ -22,58 +22,75 @@
 							<tr>
 							  <tr>
 							    <th>Nama</th>
-							    <td><input class="form-control"  type="text" name="nama"/></td>
+							    <td><input class="form-control"  type="text" name="nama" th:field="*{nama}"/></td>
 							  </tr>
 							  <tr>
 							    <th>Tempat Lahir</th>
-							    <td><input class="form-control"  type="text" name="tempatLahir"/></td>
+							    <td><input class="form-control"  type="text" name="tempatLahir" th:field="*{tempatLahir}"/></td>
 							  </tr>
 							  <tr>
 							    <th>Tanggal Lahir</th>
-							    <td><input class="form-control"  type="date" name="tanggalLahir"/></td>
+							    <td><input class="form-control"  type="date" name="tanggalLahir" th:field="*{tanggalLahir}"/></td>
 							  </tr>
 							  <tr>
 							    <th>Tahun Masuk</th>
-							    <td><input class="form-control"  type="number" min="1900" max="2099" step="1" name="tahunMasuk"/></td>
+							    <td><input class="form-control"  type="number" min="1900" max="2099" step="1" name="tahunMasuk" th:field="*{tahunMasuk}"/></td>
 							  </tr>
 							  <tr>
 							    <th>Provinsi</th>
-							    <td><select class="form-control" name="provinsi">
+							    <td><select class="form-control" name="provinsi" id="provinsi" onchange="filter(this.value)">
+							    	  <option value=0>Pilih Provinsi ...</option>
 									  <option  th:each="provinsi,iterationStatus : ${provinsiList}"
-									  			th:value="${provinsi.nama}" th:text="${provinsi.nama}">provinsi</option>
+									  			th:value="${provinsi.id}" th:text="${provinsi.nama}">provinsi</option>
 									 </select>
 							    </td>
 							    
 							  </tr>
 							  <tr>
 							    <th>Nama Instansi</th>
-							    <td><select class="form-control" name="instansi">
-									  <option  th:each="instansi,iterationStatus : ${instansiList}"
-									  			th:value="${instansi.id}" th:text="${instansi.nama}">instansi</option>
+							    <td><select class="form-control" name="instansi" id="instansi" th:field="*{instansi}">
+							    	  <option value=0>Pilih Instansi ...</option>
+									  <option  th:data-id-provinsi="${instansi.provinsi.id}" th:each="instansi : ${instansiList}"
+									  th:value="${instansi.id}" th:text="${instansi.nama}+' - '+${instansi.provinsi.nama}">instansi</option>
 									 </select>
 								</td>
 							  </tr>
 							  <tr>
 							    <th>Jabatan</th>
-							  	<td>
+							    
+							    <td>
 							  		<select class="form-control" name="jabatan">
 									  <option  th:each="jabatan,iterationStatus : ${jabatanList}"
-									  			th:value="${jabatan.nama}" th:text="${jabatan.nama}">jabatan</option>
+									  			th:value="${jabatan}" th:text="${jabatan.nama}">jabatan</option>
 									 </select>
-							  		<a href="/jabatan/tambah">Tambah Jabatan Lainnya</a>
+							  		<a href="/pegawai/tambah">Tambah Jabatan Lainnya</a>
 							  		
 							  		<div name="nip" value="1234123456123412"></div>
 							  	</td>
+							  	
 							  </tr>
-							</tr>
+					
 							</table>
 							<br>
-							<button type="submit" class="btn btn-primary">Simpan</button>
+							<button type="submit" class="btn btn-primary" name="addSubmitPegawai">Simpan</button>
 						</div>
 					</form>
 				</div>
 			</div>
 		</div>
 	</div>
+	<script>
+	$(document).ready(function() {
+		filter(document.getElementById("provinsi").value);
+	});
+	function filter(idProv) {
+		var select = document.getElementById("instansi");
+		for (var i = 1; i < select.length; i++) {
+			var txt = select.options[i].getAttribute('data-id-provinsi');
+			var include = txt.startsWith(idProv);
+			select.options[i].style.display = include ? 'list-item' : 'none';
+		}
+	}
+	</script>
 </body>
 </html>

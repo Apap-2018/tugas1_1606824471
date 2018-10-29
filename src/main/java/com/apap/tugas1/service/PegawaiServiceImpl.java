@@ -67,6 +67,7 @@ public class PegawaiServiceImpl implements PegawaiService{
 		updatedPegawai.setTanggalLahir(pegawai.getTanggalLahir());
 		updatedPegawai.setTahunMasuk(pegawai.getTahunMasuk());
 		updatedPegawai.setInstansi(pegawai.getInstansi());
+		updatedPegawai.setJabatanList(pegawai.getJabatanList());
 		pegawaiDb.save(updatedPegawai);
 	}
 	

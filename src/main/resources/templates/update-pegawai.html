@@ -16,7 +16,7 @@
 		<div class="row">
 			<div class="col-md-6">
 				<div class="card">
-					<form th:action="@{/obat/update}" th:object="${pegawai}" method="POST">
+					<form th:action="@{/pegawai/ubah}" th:object="${pegawai}" method="POST">
 						<div class="card-body">
 							<table style="width:100%" cellpadding="10">
 							<tr>
@@ -48,8 +48,8 @@
 							    <th>Jabatan</th>
 							  	<td>
 							  		<select class="form-control" name="jabatan">
-									  <option  	th:each="jabatan,iterationStatus : ${pegawaiJabList}"
-									  			th:value="${jabatan.nama}" th:text="${jabatan.nama}">jabatan</option>
+									  <option  	th:each="jabatan,iterationStatus : ${jabatanList}"
+									  			th:value="${jabatan.id}" th:text="${jabatan.nama}">jabatan</option>
 									 </select>
 							  		<a href="">Tambah Jabatan Lainnya</a>
 							  	</td>

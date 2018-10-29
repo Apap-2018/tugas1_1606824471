@@ -34,28 +34,5 @@ public class JabatanPegawaiModel implements Serializable {
 		this.id = id;
 	}
 	
-	
-//	@NotNull
-//	@Size(max = 20)
-//	@Column(name = "idInstansi", nullable = false)
-//	private long id_pegawai;
-//	
-//	@NotNull
-//	@Size(max = 20)
-//	@Column(name = "idInstansi", nullable = false)
-//	private long id_jabatan;
-//	
-//	@ManyToMany(fetch = FetchType.LAZY)
-//	@JoinColumn(name = "pegawai_id", referencedColumnName = "id", nullable = false)
-//	@OnDelete(action = OnDeleteAction.NO_ACTION)
-//	@JsonIgnore
-//	private JabatanModel pegawai;
-//	
-//	@ManyToMany(fetch = FetchType.LAZY)
-//	@JoinColumn(name = "jabatan_id", referencedColumnName = "id", nullable = false)
-//	@OnDelete(action = OnDeleteAction.NO_ACTION)
-//	@JsonIgnore
-//	private JabatanModel jabatan;
-//	
 
 }

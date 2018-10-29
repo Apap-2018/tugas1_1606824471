@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<object th:include="fragments/fragment :: title" ></object>
+	<object th:include="fragments/fragment :: css" th:remove="tag"></object>
+	<object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+	<nav th:replace="fragments/fragment :: navbar"></nav>
+	
+	<h4>Gagal menambahkan jabatan!</h4>
+	<p>(hint: Pastikan semua form input diisi dengan data yang benar.)</p>
+	<br> <button onclick="window.location.href='/jabatan/tambah' type="submit" class="btn btn-primary">Coba lagi</button>
+</body>
+<br>
+</html>

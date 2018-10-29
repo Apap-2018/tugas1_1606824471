@@ -20,11 +20,21 @@
 		<a class="navbar-brand" href="#">SIPEG</a>
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto">
-				<li class="nav-item active"><a class="nav-link" th:href="@{/}">Home</a></li>
-				<li class="nav-item active"><a class="nav-link" th:href="@{/pegawai/tambah}">Tambah Pegawai</a></li>
-				<li class="nav-item active"><a class="nav-link" th:href="@{/jabatan/tambah}">Tambah Jabatan</a></li>
-				<li class="nav-item active"><a class="nav-link" th:href="@{/pegawai/cari}">Cari Pegawai</a></li>
-				<li class="nav-item active"><a class="nav-link" th:href="@{/jabatan/viewall}">Lihat Semua Jabatan</a></li>
+				<li class="nav-item" th:classappend="${home} ? 'active' : '' ">
+	        		<a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+			    </li>
+			    <li class="nav-item" th:classappend="${tambahpegawai} ? 'active' : '' ">
+			        <a class="nav-link" th:href="@{/pegawai/tambah}">Tambah Pegawai</a>
+			    </li>
+			    <li class="nav-item" th:classappend="${tambahjabatan} ? 'active' : '' ">
+			        <a class="nav-link" th:href="@{/jabatan/tambah}">Tambah Jabatan</a>
+			    </li>
+			    <li class="nav-item" th:classappend="${caripegawai} ? 'active' : '' ">
+			        <a class="nav-link" th:href="@{/pegawai/cari}">Cari Pegawai</a>
+			    </li>
+			    <li class="nav-item" th:classappend="${viewalljabatan} ? 'active' : '' ">
+			        <a class="nav-link" th:href="@{/jabatan/viewall}">Lihat Semua Jabatan</a>
+			    </li>
 			</ul>
 		</div>
 	</nav>

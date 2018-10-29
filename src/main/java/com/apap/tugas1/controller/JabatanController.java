@@ -36,14 +36,12 @@ public class JabatanController {
 		JabatanModel newJabatan = new JabatanModel();
 		model.addAttribute("jabatan", newJabatan);
 		
-		model.addAttribute("title", "Tambah Jabatan");
+		model.addAttribute("tambahjabatan", true);
 		return "tambah-jabatan";
 	}
 	
 	@RequestMapping(value = "/jabatan/tambah", method = RequestMethod.POST)
-	private String addJabatanSubmit(@ModelAttribute JabatanModel jabatan, Model model) {
-		jabatanService.addJabatan(jabatan);
-		
+	private String addJabatanSubmit(@ModelAttribute JabatanModel jabatan, Model model) {		
 		model.addAttribute("title", "Sukses!");
 		return "tambah-jabatan";
 	}
@@ -85,7 +83,7 @@ public class JabatanController {
 	}
 	
 	@RequestMapping(value = "/jabatan/ubah", method = RequestMethod.POST)
-	private String updateDealerSubmit(@RequestParam(value = "jabatanId") long id, @ModelAttribute Optional<JabatanModel> jabatan, Model model) {
+	private String updateJabatanSubmit(@RequestParam(value = "jabatanId") long id, @ModelAttribute Optional<JabatanModel> jabatan, Model model) {
 		jabatanService.updateJabatan(id, jabatan.get());
 		model.addAttribute("id", id);
 		return "update-jabatan-sukses";
@@ -96,19 +94,28 @@ public class JabatanController {
 	 */
 	@RequestMapping(value = "/jabatan/hapus/{id}", method = RequestMethod.GET)
 	private String deleteJabatan(@PathVariable(value = "id") long id, Model model) {
-		jabatanService.deleteJabatan(id);
-		return "delete-sukses";
+		if(jabatanService.getJabatanDetailById(id).getPegawaiList().isEmpty()) {
+			jabatanService.deleteJabatan(id);
+			String pesan = "Jabatan dengan ID " + id + " berhasil dihapus :)";
+			model.addAttribute("pesan1", "Hapus Jabatan Berhasil!");
+			model.addAttribute("pesan1", pesan);
+			return "delete-result";
+		} else {
+			model.addAttribute("pesan1", "Hapus Jabatan Gagal");
+			model.addAttribute("pesan2", "Ada pegawai yang memiliki jabatan tersebut :(");
+			return "delete-result";
+		}
 	}
 	
 	/*
 	 * Fitur 9: Menampilkan Daftar jabatan
 	 */
 	@RequestMapping(value = "/jabatan/viewall", method = RequestMethod.GET)
-	private String viewAllDealer(Model model) {
+	private String viewAllJabatan(Model model) {
 		List<JabatanModel> allJabatan = jabatanService.findAll();
 	
 		model.addAttribute("jabatanlist", allJabatan);
-		model.addAttribute("title", "view all jabatan");
+		model.addAttribute("viewalljabatan", true);
 		
 		return "view-all-jabatan";
 	}
