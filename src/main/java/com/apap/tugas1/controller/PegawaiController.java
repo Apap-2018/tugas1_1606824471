@@ -124,6 +124,15 @@ public class PegawaiController {
 	 */
 	@RequestMapping(value = "/pegawai/ubah", method = RequestMethod.GET)
 	private String updateJabatan(@RequestParam(value = "pegawaiId") long id, Model model) {
+		List<ProvinsiModel> provinsiList = provinsiService.getListProvinsi();
+		model.addAttribute("provinsiList", provinsiList);
+		
+		List<InstansiModel> instansiList = instansiService.getListInstansi();
+		model.addAttribute("instansiList", instansiList);
+//		
+		List<JabatanModel> jabatanList = jabatanService.getListJabatan();
+		model.addAttribute("jabatanList", jabatanList);
+		
 		PegawaiModel pegawai =  pegawaiService.getPegawaiDetailById(id);
 		model.addAttribute("pegawai", pegawai);
 		model.addAttribute("pegawai_prov", pegawai.getInstansi().getProvinsi().getNama());
@@ -156,7 +165,7 @@ public class PegawaiController {
 		List<InstansiModel> instansiList = instansiService.getListInstansi();
 		model.addAttribute("instansiList", instansiList);
 		
-		model.addAttribute("title", "Detail Jabatan");
+		model.addAttribute("caripegawai", true);
 		return "cari-pegawai";
 	}
 	
@@ -194,7 +203,7 @@ public class PegawaiController {
 		}
 		model.addAttribute("pegawaiList", foundPegawaiList);
 		
-		model.addAttribute("title", "Home");
+		model.addAttribute("caripegawai", true);
 		return "cari-pegawai";
 	}
 	

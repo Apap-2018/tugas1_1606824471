@@ -1,5 +1,6 @@
 package com.apap.tugas1.controller;
 
+
 import java.util.List;
 import java.util.Optional;
 
@@ -59,7 +60,7 @@ public class JabatanController {
 		List<InstansiModel> instansiList = instansiService.getListInstansi();
 		model.addAttribute("instansiList", instansiList);
 
-		model.addAttribute("title", "Detail Jabatan");
+		model.addAttribute("home", true);
 		return "home";
 	}
 	
@@ -116,6 +117,7 @@ public class JabatanController {
 	
 		model.addAttribute("jabatanlist", allJabatan);
 		model.addAttribute("viewalljabatan", true);
+		
 		
 		return "view-all-jabatan";
 	}

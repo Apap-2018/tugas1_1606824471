@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-	<object th:include="fragments/fragment :: title" ></object>
+	<Title>Update pegawai</Title>
 	<object th:include="fragments/fragment :: css" th:remove="tag"></object>
 	<object th:include="fragments/fragment :: js" th:remove="tag"></object>
 </head>
@@ -38,11 +38,21 @@
 							  </tr>							  
 							  <tr>
 							    <th>Provinsi</th>
-							    <td><input class="form-control"  type="text" th:value="${pegawai_prov}" name="provinsi"/></td>
+							    <td><select class="form-control" name="provinsi" id="provinsi" onchange="filter(this.value)">
+							    	  <option value=0>Pilih Provinsi ...</option>
+									  <option  th:each="provinsi,iterationStatus : ${provinsiList}"
+									  			th:value="${pegawai_prov}" th:text="${provinsi.nama}">provinsi</option>
+									 </select>
+							    </td>
 							  </tr>
 							  <tr>
 							    <th>Nama Instansi</th>
-							    <td><input class="form-control"  type="text" th:value="${instansi}" name="instansi"/></td>
+							    <td><select class="form-control" name="instansi" id="instansi" th:field="*{instansi}">
+							    	  <option value=0>Pilih Instansi ...</option>
+									  <option  th:data-id-provinsi="${instansi.provinsi.id}" th:each="instansi : ${instansiList}"
+									  th:value="${instansi.id}" th:text="${instansi.nama}+' - '+${instansi.provinsi.nama}">instansi</option>
+									 </select>
+								</td>
 							  </tr>							  
 							  <tr>
 							    <th>Jabatan</th>
@@ -64,5 +74,18 @@
 			</div>
 		</div>
 	</div>
+		<script>
+		$(document).ready(function() {
+			filter(document.getElementById("provinsi").value);
+		});
+		function filter(idProv) {
+			var select = document.getElementById("instansi");
+			for (var i = 1; i < select.length; i++) {
+				var txt = select.options[i].getAttribute('data-id-provinsi');
+				var include = txt.startsWith(idProv);
+				select.options[i].style.display = include ? 'list-item' : 'none';
+			}
+		}
+		</script>
 </body>
 </html>
